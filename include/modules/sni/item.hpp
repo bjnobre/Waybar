@@ -108,6 +108,8 @@ class Item : public sigc::trackable {
   gdouble distance_scrolled_y_ = 0;
   // visibility of items with Status == Passive
   bool show_passive_ = false;
+  bool icon_mask_enabled_ = false;
+  Gdk::RGBA icon_mask_color_;
   // hidden via config
   bool is_hidden_ = false;
   bool ready_ = false;

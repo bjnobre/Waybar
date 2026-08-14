@@ -17,6 +17,7 @@
 #include "modules/sni/icon_manager.hpp"
 #include "util/format.hpp"  // IWYU pragma: keep
 #include "util/gtk_icon.hpp"
+#include "util/pixbuf_icon_effect.hpp"
 
 template <>
 struct fmt::formatter<Glib::VariantBase> : formatter<std::string> {
@@ -65,6 +66,14 @@ Item::Item(const std::string& bn, const std::string& op, const Json::Value& conf
   }
   if (config["show-passive-items"].isBool()) {
     show_passive_ = config["show-passive-items"].asBool();
+  }
+  if (config["icon-mask"].isString()) {
+    const auto color = config["icon-mask"].asString();
+    if (icon_mask_color_.set(color)) {
+      icon_mask_enabled_ = true;
+    } else {
+      spdlog::warn("Invalid tray icon-mask color '{}'; icon masking is disabled", color);
+    }
   }
 
   auto& window = const_cast<Bar&>(bar).window;
@@ -444,6 +453,9 @@ void Item::updateImage() {
   }
 
   pixbuf = overlayPixbufs(pixbuf, getOverlayIconPixbuf());
+  if (icon_mask_enabled_) {
+    pixbuf = waybar::util::apply_icon_mask(pixbuf, icon_mask_color_);
+  }
 
   auto surface =
       Gdk::Cairo::create_surface_from_pixbuf(pixbuf, image.get_scale_factor(), image.get_window());

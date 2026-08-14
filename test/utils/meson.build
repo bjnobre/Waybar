@@ -18,7 +18,9 @@ test_src = files(
     'command.cpp',
     'command_line_stream.cpp',
     'css_reload_helper.cpp',
+    'pixbuf_icon_effect.cpp',
     '../../src/util/css_reload_helper.cpp',
+    '../../src/util/pixbuf_icon_effect.cpp',
     '../../src/util/command_line_stream.cpp',
 )
 

@@ -16,6 +16,11 @@ Addressed by *tray*
 	typeof: integer ++
 	Defines the size of the tray icons.
 
+*icon-mask*: ++
+	typeof: string ++
+	Recolors every tray icon with the specified CSS color while preserving its alpha channel. ++
+	The color's alpha component, when present, is multiplied by the icon's original alpha.
+
 *show-passive-items*: ++
 	typeof: bool ++
 	default: false ++
@@ -67,6 +72,7 @@ might not work for some Electron apps (see https://github.com/electron/electron/
 ```
 "tray": {
 	"icon-size": 21,
+	"icon-mask": "#cdd6f4",
 	"spacing": 10,
 	"icons": {
 		"blueman": "bluetooth",
