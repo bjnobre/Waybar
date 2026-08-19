@@ -18,7 +18,7 @@ Addressed by *tray*
 
 *icon-mask*: ++
 	typeof: string ++
-	Recolors every tray icon with the specified CSS color while preserving its alpha channel. ++
+	Recolors every tray icon with the specified CSS color while preserving its perceived intensity and alpha channel. ++
 	The color's alpha component, when present, is multiplied by the icon's original alpha.
 
 *show-passive-items*: ++
